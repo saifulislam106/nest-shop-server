@@ -10,7 +10,10 @@ const port = process.env.PORT || 4000;
 // midlewire
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://nest-shop-client.vercel.app"
+    ],
     optionsSuccessStatus: 200,
   })
 );
@@ -103,7 +106,7 @@ const dbConnect = async () => {
         query.category = { $regex: category, $options: "i" };
       }
       if (brand) {
-        query.brand = brand;
+        query.brand = {$regex: category, $options: "i"};
       }
 
       const pageNumber = Number(page);
